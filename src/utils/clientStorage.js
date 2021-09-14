@@ -58,7 +58,7 @@ export const getPostsFromClientStorage = async () => {
    let posts = [];
 
    let promise = await new Promise((resolve, reject) => {
-      projectsInstance
+      postsInstance
          .iterate(function (value, key) {
             posts.push(value);
          })
