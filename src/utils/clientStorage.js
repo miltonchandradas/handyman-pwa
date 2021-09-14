@@ -16,7 +16,7 @@ export const addPostToClientStorage = async (post) => {
       "From clientStorage - addPostToClientStorage: ",
       JSON.stringify(post)
    );
-   await postsInstance.setItem("101", post);
+   await postsInstance.setItem(101, post);
 };
 
 export const addProjectsToClientStorage = async (projects) => {
@@ -73,6 +73,14 @@ export const getPostsFromClientStorage = async () => {
                },
             ]);
          });
+   });
+
+   return promise;
+};
+
+export const deletePostFromClientStorage = async (key) => {
+   let promise = await new Promise((resolve, reject) => {
+      postsInstance.removeItem(key).then(() => resolve());
    });
 
    return promise;

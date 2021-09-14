@@ -64,7 +64,7 @@ const MyProjects = ({ screenSize }) => {
             let post = {
                title: "foo",
                body: "bar",
-               userId: 1,
+               userId: 101,
             };
 
             try {

@@ -13,7 +13,10 @@ import { precacheAndRoute, createHandlerBoundToURL } from "workbox-precaching";
 import { registerRoute } from "workbox-routing";
 import { StaleWhileRevalidate } from "workbox-strategies";
 
-import { getPostsFromClientStorage } from "./utils/clientStorage";
+import {
+   getPostsFromClientStorage,
+   deletePostFromClientStorage,
+} from "./utils/clientStorage";
 
 clientsClaim();
 
@@ -23,7 +26,7 @@ clientsClaim();
 // even if you decide not to use precaching. See https://cra.link/PWA
 precacheAndRoute(self.__WB_MANIFEST);
 
-const CACHE_NAME = "v2";
+const CACHE_NAME = "v1";
 const STATIC_CACHED_ASSETS = [];
 const POSTS_URL = "https://jsonplaceholder.typicode.com/posts";
 
@@ -137,7 +140,14 @@ self.addEventListener("sync", async (event) => {
             },
          })
             .then((response) => response.json())
-            .then((json) => console.log(json));
+            .then((json) => {
+               console.log(
+                  "From Service Worker - Response from backend: ",
+                  json
+               );
+
+               deletePostFromClientStorage(json.userId);
+            });
       });
    }
 });
