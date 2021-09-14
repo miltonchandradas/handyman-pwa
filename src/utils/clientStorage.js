@@ -7,6 +7,18 @@ const projectsInstance = localforage.createInstance({
    name: "projects",
 });
 
+const postsInstance = localforage.createInstance({
+   name: "posts",
+});
+
+export const addPostToClientStorage = async (post) => {
+   console.log(
+      "From clientStorage - addPostToClientStorage: ",
+      JSON.stringify(post)
+   );
+   await postsInstance.setItem(101, post);
+};
+
 export const addProjectsToClientStorage = async (projects) => {
    console.log(
       "From clientStorage - addProjectsToClientStorage: ",

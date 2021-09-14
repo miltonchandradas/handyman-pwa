@@ -116,6 +116,14 @@ self.addEventListener("fetch", (event) => {
    return event.respondWith(cacheFirstStrategy(event.request));
 });
 
+self.addEventListener("sync", (event) => {
+   console.log("From Service Worker:  Sync event");
+
+   if (event.tag === "sync-new-post") {
+      console.log("From Service Worker:  sync-new-post");
+   }
+});
+
 const cacheFirstStrategy = async (request) => {
    const cacheResponse = await caches.match(request);
    return cacheResponse || fetchRequestAndCache(request);
