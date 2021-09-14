@@ -7,11 +7,11 @@
 // You can also remove this file if you'd prefer not to use a
 // service worker, and the Workbox build step will be skipped.
 
-import { clientsClaim } from 'workbox-core';
-import { ExpirationPlugin } from 'workbox-expiration';
-import { precacheAndRoute, createHandlerBoundToURL } from 'workbox-precaching';
-import { registerRoute } from 'workbox-routing';
-import { StaleWhileRevalidate } from 'workbox-strategies';
+import { clientsClaim } from "workbox-core";
+import { ExpirationPlugin } from "workbox-expiration";
+import { precacheAndRoute, createHandlerBoundToURL } from "workbox-precaching";
+import { registerRoute } from "workbox-routing";
+import { StaleWhileRevalidate } from "workbox-strategies";
 
 clientsClaim();
 
@@ -21,52 +21,118 @@ clientsClaim();
 // even if you decide not to use precaching. See https://cra.link/PWA
 precacheAndRoute(self.__WB_MANIFEST);
 
+const CACHE_NAME = "v2";
+const STATIC_CACHED_ASSETS = [];
+
 // Set up App Shell-style routing, so that all navigation requests
 // are fulfilled with your index.html shell. Learn more at
 // https://developers.google.com/web/fundamentals/architecture/app-shell
-const fileExtensionRegexp = new RegExp('/[^/?]+\\.[^/]+$');
+const fileExtensionRegexp = new RegExp("/[^/?]+\\.[^/]+$");
 registerRoute(
-  // Return false to exempt requests from being fulfilled by index.html.
-  ({ request, url }) => {
-    // If this isn't a navigation, skip.
-    if (request.mode !== 'navigate') {
-      return false;
-    } // If this is a URL that starts with /_, skip.
+   // Return false to exempt requests from being fulfilled by index.html.
+   ({ request, url }) => {
+      // If this isn't a navigation, skip.
+      if (request.mode !== "navigate") {
+         return false;
+      } // If this is a URL that starts with /_, skip.
 
-    if (url.pathname.startsWith('/_')) {
-      return false;
-    } // If this looks like a URL for a resource, because it contains // a file extension, skip.
+      if (url.pathname.startsWith("/_")) {
+         return false;
+      } // If this looks like a URL for a resource, because it contains // a file extension, skip.
 
-    if (url.pathname.match(fileExtensionRegexp)) {
-      return false;
-    } // Return true to signal that we want to use the handler.
+      if (url.pathname.match(fileExtensionRegexp)) {
+         return false;
+      } // Return true to signal that we want to use the handler.
 
-    return true;
-  },
-  createHandlerBoundToURL(process.env.PUBLIC_URL + '/index.html')
+      return true;
+   },
+   createHandlerBoundToURL(process.env.PUBLIC_URL + "/index.html")
 );
 
 // An example runtime caching route for requests that aren't handled by the
 // precache, in this case same-origin .png requests like those from in public/
 registerRoute(
-  // Add in any other file extensions or routing criteria as needed.
-  ({ url }) => url.origin === self.location.origin && url.pathname.endsWith('.png'), // Customize this strategy as needed, e.g., by changing to CacheFirst.
-  new StaleWhileRevalidate({
-    cacheName: 'images',
-    plugins: [
-      // Ensure that once this runtime cache reaches a maximum size the
-      // least-recently used images are removed.
-      new ExpirationPlugin({ maxEntries: 50 }),
-    ],
-  })
+   // Add in any other file extensions or routing criteria as needed.
+   ({ url }) =>
+      url.origin === self.location.origin && url.pathname.endsWith(".png"), // Customize this strategy as needed, e.g., by changing to CacheFirst.
+   new StaleWhileRevalidate({
+      cacheName: "images",
+      plugins: [
+         // Ensure that once this runtime cache reaches a maximum size the
+         // least-recently used images are removed.
+         new ExpirationPlugin({ maxEntries: 50 }),
+      ],
+   })
 );
 
 // This allows the web app to trigger skipWaiting via
 // registration.waiting.postMessage({type: 'SKIP_WAITING'})
-self.addEventListener('message', (event) => {
-  if (event.data && event.data.type === 'SKIP_WAITING') {
-    self.skipWaiting();
-  }
+self.addEventListener("message", (event) => {
+   if (event.data && event.data.type === "SKIP_WAITING") {
+      self.skipWaiting();
+   }
 });
 
 // Any other custom service worker logic can go here.
+// Install Service Worker...
+self.addEventListener("install", (event) => {
+   console.log(`From Service Worker:  Install event`);
+   self.skipWaiting();
+
+   const preCache = async () => {
+      const cache = await caches.open(CACHE_NAME);
+      return cache.addAll(STATIC_CACHED_ASSETS);
+   };
+
+   event.waitUntil(preCache());
+});
+
+// Activate the Service Worker...
+self.addEventListener("activate", (event) => {
+   console.log(`From Service Worker:  Activate event`);
+});
+
+// Listen for requests...
+self.addEventListener("fetch", (event) => {
+   console.log("From Service Worker:  Fetch event");
+
+   const requestUrl = new URL(event.request.url);
+   const requestPath = requestUrl.pathname;
+   const fileName = requestPath.substring(requestPath.lastIndexOf("/") + 1);
+
+   console.log("Request URL: ", requestUrl);
+   console.log("Request Path: ", requestPath);
+   console.log("File Name: ", fileName);
+
+   if (requestPath === "/users") {
+      return event.respondWith(fetch(event.request));
+   } else if (
+      fileName === "serviceworker.js" ||
+      fileName === "serviceworkerDEV.js"
+   ) {
+      return event.respondWith(networkFirstStrategy(event.request));
+   }
+
+   return event.respondWith(cacheFirstStrategy(event.request));
+});
+
+const cacheFirstStrategy = async (request) => {
+   const cacheResponse = await caches.match(request);
+   return cacheResponse || fetchRequestAndCache(request);
+};
+
+const networkFirstStrategy = async (request) => {
+   try {
+      return await fetchRequestAndCache(request);
+   } catch {
+      return await caches.match(request);
+   }
+};
+
+const fetchRequestAndCache = async (request) => {
+   const networkResponse = await fetch(request);
+   const clonedResponse = networkResponse.clone();
+   const cache = await caches.open(CACHE_NAME);
+   cache.put(request, networkResponse);
+   return clonedResponse;
+};
