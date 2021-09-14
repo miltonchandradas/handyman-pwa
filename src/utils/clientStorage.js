@@ -16,7 +16,7 @@ export const addPostToClientStorage = async (post) => {
       "From clientStorage - addPostToClientStorage: ",
       JSON.stringify(post)
    );
-   await postsInstance.setItem(101, post);
+   await postsInstance.setItem(post.userId, post);
 };
 
 export const addProjectsToClientStorage = async (projects) => {
