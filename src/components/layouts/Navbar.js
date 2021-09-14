@@ -60,7 +60,7 @@ const Navbar = (props) => {
                </>
             }
             notificationsCount="10"
-            primaryTitle="Handyman Application (Modified)"
+            primaryTitle="Handyman Application"
             profile={
                <Avatar
                   colorScheme="Accent2"
