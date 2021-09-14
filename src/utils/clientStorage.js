@@ -80,7 +80,12 @@ export const getPostsFromClientStorage = async () => {
 
 export const deletePostFromClientStorage = async (key) => {
    let promise = await new Promise((resolve, reject) => {
-      postsInstance.removeItem(key).then(() => resolve());
+      postsInstance
+         .removeItem(key)
+         .then(() => resolve(`Deleted post with key ${key.userId}`))
+         .catch((err) =>
+            reject(`Unable to delete post with key ${key.userId}`)
+         );
    });
 
    return promise;
