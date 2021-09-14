@@ -146,7 +146,7 @@ self.addEventListener("sync", async (event) => {
                   json
                );
 
-               deletePostFromClientStorage(json.userId);
+               deletePostFromClientStorage(json.userId.toString());
             });
       });
    }
