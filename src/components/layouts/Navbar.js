@@ -10,7 +10,6 @@ import {
    ProductSwitchItem,
 } from "@ui5/webcomponents-react";
 
-
 import logo from "../../resources/images/logo.png";
 
 const Navbar = (props) => {
@@ -61,7 +60,7 @@ const Navbar = (props) => {
                </>
             }
             notificationsCount="10"
-            primaryTitle="Handyman Application"
+            primaryTitle="Handyman Application (Modified)"
             profile={
                <Avatar
                   colorScheme="Accent2"
