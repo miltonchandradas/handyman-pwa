@@ -11,8 +11,13 @@ const MyAccount = () => {
             console.log("Notification permission not granted...");
          } else {
             console.log("Notification permission granted...");
+            displayConfirmNotification();
          }
       });
+   };
+
+   const displayConfirmNotification = () => {
+      new Notification("Successfully subscribed !!");
    };
 
    return (
