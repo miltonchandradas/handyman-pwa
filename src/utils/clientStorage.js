@@ -16,7 +16,7 @@ export const addPostToClientStorage = async (post) => {
       "From clientStorage - addPostToClientStorage: ",
       JSON.stringify(post)
    );
-   await postsInstance.setItem(101, post);
+   await postsInstance.setItem("101", post);
 };
 
 export const addProjectsToClientStorage = async (projects) => {
@@ -43,7 +43,34 @@ export const getProjectsFromClientStorage = async () => {
          })
          .catch(function (err) {
             reject([
-               { key: -100, value: { name: "Unable to read data from cache..." } },
+               {
+                  key: "-100",
+                  value: { name: "Unable to read data from cache..." },
+               },
+            ]);
+         });
+   });
+
+   return promise;
+};
+
+export const getPostsFromClientStorage = async () => {
+   let posts = [];
+
+   let promise = await new Promise((resolve, reject) => {
+      projectsInstance
+         .iterate(function (value, key) {
+            posts.push(value);
+         })
+         .then(function () {
+            resolve(posts);
+         })
+         .catch(function (err) {
+            reject([
+               {
+                  key: "-100",
+                  value: { title: "Unable to read data from cache..." },
+               },
             ]);
          });
    });
