@@ -21,6 +21,8 @@ const MyAccount = () => {
          let options = {
             body: "You successfully subscribed to our Notification Service...",
             icon: "/images/app-icon-96x96.png",
+            vibrate: [100, 50, 200],
+            badge: "/images/app-icon-96x96.png",
          };
 
          navigator.serviceWorker.ready.then((sw) => {
