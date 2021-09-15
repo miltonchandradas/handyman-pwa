@@ -17,7 +17,16 @@ const MyAccount = () => {
    };
 
    const displayConfirmNotification = () => {
-      new Notification("Successfully subscribed !!");
+      if ("serviceWorker" in navigator) {
+         let options = {
+            body: "You successfully subscribed to our Notification Service...",
+            icon: "/images/app-icon-96x96.png",
+         };
+
+         navigator.serviceWorker.ready.then((sw) => {
+            sw.showNotification("Successfully subscribed !!", options);
+         });
+      }
    };
 
    return (
