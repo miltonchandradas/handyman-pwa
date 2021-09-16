@@ -62,7 +62,8 @@ const MyAccount = () => {
                applicationServerKey: urlBase64ToUint8Array(PUBLIC_VAPID_KEY),
             });
 
-            console.log("New subscription: ", JSON.stringify(newSubscription));
+            let newSubscriptionString = JSON.stringify(newSubscription);
+            console.log("New subscription (before): ", newSubscriptionString);
 
             let response = await fetch(`${NODE_BASE_URL}${SUBSCRIPTION_PATH}`, {
                method: "POST",
@@ -70,8 +71,10 @@ const MyAccount = () => {
                   "Content-Type": "application-json",
                   Accept: "application-json",
                },
-               body: JSON.stringify(newSubscription),
+               body: newSubscriptionString,
             });
+
+            console.log("New subscription (after): ", newSubscriptionString);
 
             if (response.ok) displayConfirmNotification();
          }
