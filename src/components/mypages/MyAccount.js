@@ -24,7 +24,7 @@ const MyAccount = () => {
    const urlBase64ToUint8Array = (base64String) => {
       var padding = "=".repeat((4 - (base64String.length % 4)) % 4);
       var base64 = (base64String + padding)
-         .replace(/\-/g, "+")
+         .replace(/-/g, "+")
          .replace(/_/g, "/");
 
       var rawData = window.atob(base64);
@@ -41,15 +41,22 @@ const MyAccount = () => {
          return;
       }
 
+      console.log("Configure Push Subscription...");
+
       let registration;
 
       try {
          let sw = await navigator.serviceWorker.ready;
 
+         console.log("Service worker is ready...");
+
          registration = sw;
          let subscription = await sw.pushManager.getSubscription();
 
          if (!subscription) {
+            console.log(
+               "Subscription not found - Creating new subscription..."
+            );
             let newSubscription = await registration.pushManager.subscribe({
                userVisibleOnly: true,
                applicationServerKey: urlBase64ToUint8Array(PUBLIC_VAPID_KEY),
