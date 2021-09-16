@@ -80,7 +80,7 @@ const MyAccount = () => {
       }
    };
 
-   const displayConfirmNotification = () => {
+   const displayConfirmNotification = async () => {
       if ("serviceWorker" in navigator) {
          let options = {
             body: "You successfully subscribed to our Notification Service...",
@@ -89,9 +89,8 @@ const MyAccount = () => {
             badge: "/images/app-icon-96x96.png",
          };
 
-         navigator.serviceWorker.ready.then((sw) => {
-            sw.showNotification("Successfully subscribed !!", options);
-         });
+         let sw = await navigator.serviceWorker.ready;
+         sw.showNotification("Successfully subscribed !!", options);
       }
    };
 
