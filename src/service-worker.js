@@ -136,7 +136,7 @@ self.addEventListener("sync", async (event) => {
             method: "POST",
             body: JSON.stringify(post),
             headers: {
-               "Content-type": "application/json; charset=UTF-8",
+               "Content-Type": "application/json; charset=UTF-8",
             },
          })
             .then((response) => response.json())

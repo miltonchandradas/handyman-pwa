@@ -60,7 +60,7 @@ const MyProjects = ({ screenSize }) => {
       console.log("From MyProjects - btnClickHandler:  Add new Project");
 
       if ("serviceWorker" in navigator && "SyncManager" in window) {
-         let sw = await navigator.serviceWorker.ready();
+         let sw = await navigator.serviceWorker.ready;
 
          let post = {
             title: "foo",
