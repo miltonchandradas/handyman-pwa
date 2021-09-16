@@ -152,6 +152,33 @@ self.addEventListener("sync", async (event) => {
    }
 });
 
+self.addEventListener("notificationclick", (event) => {
+   console.log("From Service Worker:  Notification Click event");
+});
+
+self.addEventListener("notificationclose", (event) => {
+   console.log("From Service Worker:  Notification Close event");
+});
+
+self.addEventListener("push", (event) => {
+   console.log("From Service Worker:  Push event");
+
+   let data = {
+      title: "New...",
+      body: "Something new happened !",
+   };
+
+   if (event.data) {
+      data = JSON.parse(event.data.text());
+   }
+
+   let options = {
+      body: data.body,
+   };
+
+   event.waitUntil(self.registration.showNotification(data.title, options));
+});
+
 const cacheFirstStrategy = async (request) => {
    const cacheResponse = await caches.match(request);
    return cacheResponse || fetchRequestAndCache(request);

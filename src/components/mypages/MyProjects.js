@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import { Button, Label, List } from "@ui5/webcomponents-react";
-import { BASE_URL, PROJECTS_PATH } from "../../utils/constants";
+import { BASE_URL, PROJECTS_PATH, PUBLIC_VAPID_KEY } from "../../utils/constants";
 
 import MyProject from "./MyProject";
 import {
@@ -56,31 +56,33 @@ const MyProjects = ({ screenSize }) => {
       asyncFetchPromise();
    }, []);
 
-   const btnClickHandler = (event) => {
+   const btnClickHandler = async (event) => {
+
+      console.log("From MyProjects - btnClickHandler:  Add new Project");
+
       if ("serviceWorker" in navigator && "SyncManager" in window) {
-         navigator.serviceWorker.ready.then(async (sw) => {
-            console.log("From MyProjects - btnClickHandler:  Add new Project");
 
-            let post = {
-               title: "foo",
-               body: "bar",
-               userId: 101,
-            };
+         let sw = await navigator.serviceWorker.ready();
 
-            try {
-               await addPostToClientStorage(post);
-               await sw.sync.register("sync-new-post");
-            } catch (err) {
-               console.log("From MyProjects - btnClickHandler:  Error: ", err);
-            }
-         });
+         let post = {
+            title: "foo",
+            body: "bar",
+            userId: 101,
+         };
+
+         try {
+            await addPostToClientStorage(post);
+            await sw.sync.register("sync-new-post");
+         } catch (err) {
+            console.log("From MyProjects - btnClickHandler:  Error: ", err);
+         }
       }
    };
 
    return (
       <section>
          <h1>My Projects</h1>
-         <Label>{networkStatus}</Label>
+         <Label>{networkStatus}</Label><br></br>
          <Button onClick={btnClickHandler}>Add new Project</Button>
          <List headerText="My Projects !!">
             {projects &&
