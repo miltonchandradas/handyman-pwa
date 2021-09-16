@@ -44,7 +44,7 @@ const MyAccount = () => {
       let registration;
 
       try {
-         let sw = await navigator.serviceWorker.ready();
+         let sw = await navigator.serviceWorker.ready;
 
          registration = sw;
          let subscription = await sw.pushManager.getSubscription();
