@@ -62,6 +62,8 @@ const MyAccount = () => {
                applicationServerKey: urlBase64ToUint8Array(PUBLIC_VAPID_KEY),
             });
 
+            console.log("New subscription: ", JSON.stringify(newSubscription));
+
             let response = await fetch(`${NODE_BASE_URL}${SUBSCRIPTION_PATH}`, {
                method: "POST",
                headers: {
@@ -72,7 +74,6 @@ const MyAccount = () => {
             });
 
             if (response.ok) displayConfirmNotification();
-         } else {
          }
       } catch (err) {
          console.log("From MyAccount - Error: ", err);
