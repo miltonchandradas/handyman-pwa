@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import MyCamera from "./MyCamera";
+import MyCamera from "../camera/MyCamera";
 import { Button } from "@ui5/webcomponents-react";
 
 const MyReviews = () => {
