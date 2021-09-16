@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import { Button, Label, List } from "@ui5/webcomponents-react";
-import { BASE_URL, PROJECTS_PATH, PUBLIC_VAPID_KEY } from "../../utils/constants";
+import { BASE_URL, PROJECTS_PATH } from "../../utils/constants";
 
 import MyProject from "./MyProject";
 import {
@@ -57,11 +57,9 @@ const MyProjects = ({ screenSize }) => {
    }, []);
 
    const btnClickHandler = async (event) => {
-
       console.log("From MyProjects - btnClickHandler:  Add new Project");
 
       if ("serviceWorker" in navigator && "SyncManager" in window) {
-
          let sw = await navigator.serviceWorker.ready();
 
          let post = {
@@ -82,7 +80,8 @@ const MyProjects = ({ screenSize }) => {
    return (
       <section>
          <h1>My Projects</h1>
-         <Label>{networkStatus}</Label><br></br>
+         <Label>{networkStatus}</Label>
+         <br></br>
          <Button onClick={btnClickHandler}>Add new Project</Button>
          <List headerText="My Projects !!">
             {projects &&

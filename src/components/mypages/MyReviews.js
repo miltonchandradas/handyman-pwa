@@ -5,7 +5,6 @@ import { Button } from "@ui5/webcomponents-react";
 
 const MyReviews = () => {
    const [isHidden, setIsHidden] = useState(true);
-   const [buttonText, setButtonText] = useState(true);
 
    const btnClickHandler = (event) => {
       setIsHidden(!isHidden);
