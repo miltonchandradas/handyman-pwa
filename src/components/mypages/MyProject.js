@@ -5,33 +5,29 @@ import { Card, CardHeader, Button, Label } from "@ui5/webcomponents-react";
 const MyProject = ({ project }) => {
    return (
       <Card
+         className="myproject-card"
          header={
             <CardHeader
                titleText={project.title}
                subtitleText={`Rating: ${project.rating}`}
             />
          }
-         style={{
-            width: "300px",
-            marginTop: "30px",
-            marginRight: "30px",
-         }}
       >
          <div>
-            <Label>{`<b>Description:</b> ${
+            <Label>{`Description: ${
                project.description ? project.description : ""
             }`}</Label>
-            <br></br>
+            <br />
             <Label>{`Cost: ${project.estimatedCost}`}</Label>
-            <br></br>
+            <br />
             <Label>{`Start Date: ${new Date(
                project.projectedStartDate
             ).toDateString()}`}</Label>
-            <br></br>
+            <br />
             <Label>{`End Date: ${new Date(
                project.projectedEndDate
             ).toDateString()}`}</Label>
-            <br></br>
+            <br />
          </div>
          <Button>Rehire Handyman</Button>
       </Card>
