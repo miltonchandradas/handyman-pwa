@@ -18,7 +18,7 @@ const MyProject = ({ project }) => {
          }}
       >
          <div>
-            <Label>{`Description: ${
+            <Label>{`<b>Description:</b> ${
                project.description ? project.description : ""
             }`}</Label>
             <br></br>
