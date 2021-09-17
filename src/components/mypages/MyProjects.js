@@ -88,6 +88,7 @@ const MyProjects = ({ screenSize }) => {
       <section>
          <h1>My Projects</h1>
          <MessageStrip
+            className="myprojects-controls"
             hideCloseButton="true"
             design={
                networkStatus ===
@@ -98,7 +99,7 @@ const MyProjects = ({ screenSize }) => {
          >
             {networkStatus}
          </MessageStrip>
-         <Toolbar>
+         <Toolbar className="myprojects-controls">
             <ToolbarSpacer />
             <Button onClick={btnClickHandler}>Add new Project</Button>
             <Icon name="settings" />
