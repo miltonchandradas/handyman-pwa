@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 
 import Footer from "../layouts/Footer";
 
@@ -87,40 +87,42 @@ const MyProjects = ({ screenSize }) => {
    };
 
    return (
-      <section>
-         <h1>My Projects</h1>
-         <MessageStrip
-            className="myprojects-controls"
-            hideCloseButton="true"
-            design={
-               networkStatus ===
-               "Network connection is OK, showing latest results"
-                  ? "Information"
-                  : "Negative"
-            }
-         >
-            {networkStatus}
-         </MessageStrip>
-         <Toolbar className="myprojects-controls">
-            <ToolbarSpacer />
-            <Button onClick={btnClickHandler}>Add new Project</Button>
-            <Icon name="settings" />
-            <Icon name="download" />
-         </Toolbar>
+      <Fragment>
+         <section>
+            <h1>My Projects</h1>
+            <MessageStrip
+               className="myprojects-controls"
+               hideCloseButton="true"
+               design={
+                  networkStatus ===
+                  "Network connection is OK, showing latest results"
+                     ? "Information"
+                     : "Negative"
+               }
+            >
+               {networkStatus}
+            </MessageStrip>
+            <Toolbar className="myprojects-controls">
+               <ToolbarSpacer />
+               <Button onClick={btnClickHandler}>Add new Project</Button>
+               <Icon name="settings" />
+               <Icon name="download" />
+            </Toolbar>
 
-         <FlexBox
-            direction={screenSize > 480 ? "Row" : "Column"}
-            justifyContent="Center"
-         >
-            {projects &&
-               projects.map((project) => {
-                  return (
-                     <MyProject key={project.key} project={project.value} />
-                  );
-               })}
-         </FlexBox>
+            <FlexBox
+               direction={screenSize > 480 ? "Row" : "Column"}
+               justifyContent="Center"
+            >
+               {projects &&
+                  projects.map((project) => {
+                     return (
+                        <MyProject key={project.key} project={project.value} />
+                     );
+                  })}
+            </FlexBox>
+         </section>
          <Footer></Footer>
-      </section>
+      </Fragment>
    );
 };
 
