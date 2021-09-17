@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { Button, Label, List } from "@ui5/webcomponents-react";
+import { Button, List, MessageStrip } from "@ui5/webcomponents-react";
 import { NODE_BASE_URL, PROJECTS_PATH } from "../../utils/constants";
 
 import MyProject from "./MyProject";
@@ -80,7 +80,16 @@ const MyProjects = ({ screenSize }) => {
    return (
       <section>
          <h1>My Projects</h1>
-         <Label>{networkStatus}</Label>
+         <MessageStrip
+            design={
+               networkStatus ===
+               "Network connection is OK, showing latest results"
+                  ? "Information"
+                  : "Negative"
+            }
+         >
+            {networkStatus}
+         </MessageStrip>
          <br></br>
          <Button onClick={btnClickHandler}>Add new Project</Button>
          <List headerText="My Projects !!">
