@@ -13,7 +13,7 @@ const MyProject = ({ project }) => {
             />
          }
       >
-         <div>
+         <div className="myproject-div">
             <Label>{`Description: ${
                project.description ? project.description : ""
             }`}</Label>
