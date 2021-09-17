@@ -1,6 +1,12 @@
 import React from "react";
 
-import { Card, CardHeader, Button, Label } from "@ui5/webcomponents-react";
+import {
+   Card,
+   CardHeader,
+   Button,
+   Label,
+   RatingIndicator,
+} from "@ui5/webcomponents-react";
 
 const MyProject = ({ project }) => {
    return (
@@ -28,8 +34,11 @@ const MyProject = ({ project }) => {
                project.projectedEndDate
             ).toDateString()}`}</Label>
             <br />
+            <RatingIndicator readonly="true" value={project.rating} />
+            <br />
+            <br />
+            <Button>Rehire Handyman</Button>
          </div>
-         <Button>Rehire Handyman</Button>
       </Card>
    );
 };
