@@ -110,7 +110,10 @@ self.addEventListener("fetch", (event) => {
    console.log("Request Path: ", requestPath);
    console.log("File Name: ", fileName);
 
-   if (requestPath === "/users" || requestPath === "/api/v1/subscription") {
+   if (
+      requestPath === "/api/v1/projects" ||
+      requestPath === "/api/v1/subscription"
+   ) {
       return event.respondWith(fetch(event.request));
    } else if (
       fileName === "serviceworker.js" ||
