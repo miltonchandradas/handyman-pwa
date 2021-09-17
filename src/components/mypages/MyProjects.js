@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react";
 
-import { Button, List, MessageStrip } from "@ui5/webcomponents-react";
+import {
+   Button,
+   List,
+   MessageStrip,
+   Toolbar,
+   ToolbarSpacer,
+   Icon,
+} from "@ui5/webcomponents-react";
 import { NODE_BASE_URL, PROJECTS_PATH } from "../../utils/constants";
 
 import MyProject from "./MyProject";
@@ -91,7 +98,12 @@ const MyProjects = ({ screenSize }) => {
             {networkStatus}
          </MessageStrip>
          <br></br>
-         <Button onClick={btnClickHandler}>Add new Project</Button>
+         <Toolbar>
+            <ToolbarSpacer />
+            <Button onClick={btnClickHandler}>Add new Project</Button>
+            <Icon name="settings" />
+            <Icon name="download" />
+         </Toolbar>
          <List headerText="My Projects !!">
             {projects &&
                projects.map((project) => {
