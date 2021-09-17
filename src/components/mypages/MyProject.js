@@ -13,6 +13,7 @@ const MyProject = ({ project }) => {
          }
          style={{
             width: "300px",
+            marginTop: "30px",
             marginRight: "30px",
          }}
       >
