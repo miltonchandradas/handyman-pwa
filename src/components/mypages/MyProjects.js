@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 
+import Footer from "../layouts/Footer";
+
 import {
    FlexBox,
    Button,
@@ -117,6 +119,7 @@ const MyProjects = ({ screenSize }) => {
                   );
                })}
          </FlexBox>
+         <Footer></Footer>
       </section>
    );
 };
