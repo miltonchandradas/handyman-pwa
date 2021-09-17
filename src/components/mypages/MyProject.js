@@ -22,8 +22,12 @@ const MyProject = ({ project }) => {
                project.description ? project.description : ""
             }`}</Label>
             <Label>{`Cost: ${project.estimatedCost}`}</Label>
-            <Label>{`Start Date: ${project.projectedStartDate.toLocaleDateString()}`}</Label>
-            <Label>{`End Date: ${project.projectedEndDate.toLocaleDateString()}`}</Label>
+            <Label>{`Start Date: ${Date.parse(
+               project.projectedStartDate
+            ).toLocaleDateString()}`}</Label>
+            <Label>{`End Date: ${Date.parse(
+               project.projectedEndDate
+            ).toLocaleDateString()}`}</Label>
          </div>
          <Button>Rehire Handyman</Button>
       </Card>
