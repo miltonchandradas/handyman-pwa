@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 
 import {
+   FlexBox,
    Button,
-   List,
    MessageStrip,
    Toolbar,
    ToolbarSpacer,
@@ -105,14 +105,18 @@ const MyProjects = ({ screenSize }) => {
             <Icon name="settings" />
             <Icon name="download" />
          </Toolbar>
-         <List headerText="My Projects !!">
+
+         <FlexBox
+            direction={screenSize > 480 ? "Row" : "Column"}
+            justifyContent="Center"
+         >
             {projects &&
                projects.map((project) => {
                   return (
                      <MyProject key={project.key} project={project.value} />
                   );
                })}
-         </List>
+         </FlexBox>
       </section>
    );
 };

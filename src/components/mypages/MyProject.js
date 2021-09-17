@@ -1,18 +1,29 @@
-import React, { Fragment } from "react";
+import React from "react";
 
-import { StandardListItem } from "@ui5/webcomponents-react";
+import { Card, CardHeader, Button, Label } from "@ui5/webcomponents-react";
 
 const MyProject = ({ project }) => {
    return (
-      <Fragment>
-         <StandardListItem
-            mode="None"
-            headerText="List with StandardListItems"
-            description={project.title}
-            icon="employee"
-            separators="All"
-         ></StandardListItem>
-      </Fragment>
+      <Card
+         header={
+            <CardHeader
+               titleText={project.title}
+               subtitleText={`Rating: ${project.rating}`}
+            />
+         }
+         style={{
+            width: "300px",
+            marginRight: "30px",
+         }}
+      >
+         <div>
+            <Label>{`Description: ${project.description}`}</Label>
+            <Label>{`Cost: ${project.estimatedCost}`}</Label>
+            <Label>{`Start Date: ${project.projectedStartDate}`}</Label>
+            <Label>{`End Date: ${project.projectedEndDate}`}</Label>
+         </div>
+         <Button>Rehire Handyman for another project</Button>
+      </Card>
    );
 };
 
