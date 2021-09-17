@@ -63,7 +63,6 @@ const MyAccount = () => {
             });
 
             let newSubscriptionString = JSON.stringify(newSubscription);
-            console.log("New subscription (before): ", newSubscriptionString);
 
             let response = await fetch(`${NODE_BASE_URL}${SUBSCRIPTION_PATH}`, {
                method: "POST",
@@ -73,8 +72,6 @@ const MyAccount = () => {
                },
                body: newSubscriptionString,
             });
-
-            console.log("New subscription (after): ", newSubscriptionString);
 
             if (response.ok) displayConfirmNotification();
          }

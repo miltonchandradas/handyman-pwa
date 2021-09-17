@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import { Button, Label, List } from "@ui5/webcomponents-react";
-import { BASE_URL, PROJECTS_PATH } from "../../utils/constants";
+import { NODE_BASE_URL, PROJECTS_PATH } from "../../utils/constants";
 
 import MyProject from "./MyProject";
 import {
@@ -17,13 +17,13 @@ const MyProjects = ({ screenSize }) => {
    const [projects, setProjects] = useState([]);
 
    const getProjectsFromBackend = async () => {
-      const requestUrl = `${BASE_URL}${PROJECTS_PATH}`;
+      const requestUrl = `${NODE_BASE_URL}${PROJECTS_PATH}`;
       const response = await fetch(requestUrl);
       const data = await response.json();
 
-      let modifiedProjects = data.map((project) => {
+      let modifiedProjects = data.data.map((project) => {
          return {
-            key: project.id,
+            key: project._id,
             value: project,
          };
       });
