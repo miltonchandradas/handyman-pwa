@@ -98,7 +98,6 @@ const MyProjects = ({ screenSize }) => {
          >
             {networkStatus}
          </MessageStrip>
-         <br></br>
          <Toolbar>
             <ToolbarSpacer />
             <Button onClick={btnClickHandler}>Add new Project</Button>

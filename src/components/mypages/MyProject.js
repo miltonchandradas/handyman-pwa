@@ -17,12 +17,18 @@ const MyProject = ({ project }) => {
          }}
       >
          <div>
-            <Label>{`Description: ${project.description}`}</Label>
+            <Label>{`Description: ${
+               project.description ? project.description : ""
+            }`}</Label>
             <Label>{`Cost: ${project.estimatedCost}`}</Label>
-            <Label>{`Start Date: ${project.projectedStartDate}`}</Label>
-            <Label>{`End Date: ${project.projectedEndDate}`}</Label>
+            <Label>{`Start Date: ${project.projectedStartDate.toLocaleDateString(
+               "en-US"
+            )}`}</Label>
+            <Label>{`End Date: ${project.projectedEndDate.toLocaleDateString(
+               "en-US"
+            )}`}</Label>
          </div>
-         <Button>Rehire Handyman for another project</Button>
+         <Button>Rehire Handyman</Button>
       </Card>
    );
 };
