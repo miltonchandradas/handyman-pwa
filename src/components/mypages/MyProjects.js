@@ -88,6 +88,7 @@ const MyProjects = ({ screenSize }) => {
       <section>
          <h1>My Projects</h1>
          <MessageStrip
+            hideCloseButton="true"
             design={
                networkStatus ===
                "Network connection is OK, showing latest results"
