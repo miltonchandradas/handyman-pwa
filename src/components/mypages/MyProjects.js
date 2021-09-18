@@ -9,6 +9,7 @@ import {
    Toolbar,
    ToolbarSpacer,
    Icon,
+   MessageBox,
 } from "@ui5/webcomponents-react";
 import { NODE_BASE_URL, PROJECTS_PATH } from "../../utils/constants";
 
@@ -16,7 +17,7 @@ import MyProject from "./MyProject";
 import {
    getProjectsFromClientStorage,
    addProjectsToClientStorage,
-   addPostToClientStorage,
+   addNewPostToClientStorage,
 } from "../../utils/clientStorage";
 
 const MyProjects = ({ screenSize }) => {
@@ -24,6 +25,7 @@ const MyProjects = ({ screenSize }) => {
       "Network connection is OK, showing latest results"
    );
    const [projects, setProjects] = useState([]);
+   const [open, setOpen] = useState(false);
 
    const getProjectsFromBackend = async () => {
       const requestUrl = `${NODE_BASE_URL}${PROJECTS_PATH}`;
@@ -67,23 +69,33 @@ const MyProjects = ({ screenSize }) => {
 
    const btnClickHandler = async (event) => {
       console.log("From MyProjects - btnClickHandler:  Add new Project");
+      setOpen(true);
 
       if ("serviceWorker" in navigator && "SyncManager" in window) {
          let sw = await navigator.serviceWorker.ready;
 
-         let post = {
+         let project = {
+            _id: "5d713995b721c3bb38c1f5d0",
             title: "foo",
-            body: "bar",
-            userId: 101,
+            subTitleText: "bar",
+            description:
+               "Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus totam dignissimos accusamus neque velit fuga quos vel voluptate voluptas. Placeat nihil asperiores eius quaerat saepe. Odio aliquid iste optio est.",
+            estimatedCost: 95,
+            handyman: "Mike Jones",
+            rating: 5,
          };
 
          try {
-            await addPostToClientStorage(post);
+            await addNewPostToClientStorage(project);
             await sw.sync.register("sync-new-post");
          } catch (err) {
             console.log("From MyProjects - btnClickHandler:  Error: ", err);
          }
       }
+   };
+
+   const closeHandler = () => {
+      setOpen(false);
    };
 
    return (
@@ -105,6 +117,9 @@ const MyProjects = ({ screenSize }) => {
             <Toolbar className="myprojects-controls">
                <ToolbarSpacer />
                <Button onClick={btnClickHandler}>Add new Project</Button>
+               <MessageBox open={open} onClose={closeHandler}>
+                  Preconfigured project has been added...
+               </MessageBox>
                <Icon name="settings" />
                <Icon name="download" />
             </Toolbar>

@@ -15,13 +15,14 @@ const usersInstance = localforage.createInstance({
    name: "users",
 });
 
-export const addPostToClientStorage = async (post) => {
+export const addNewPostToClientStorage = async (post) => {
    console.log(
       "From clientStorage - addPostToClientStorage: ",
       JSON.stringify(post)
    );
-   await postsInstance.setItem(post.userId, post);
+   await postsInstance.setItem(post._id, post);
 };
+
 
 export const addProjectsToClientStorage = async (projects) => {
    console.log(
@@ -122,9 +123,9 @@ export const deletePostFromClientStorage = async (key) => {
    let promise = await new Promise((resolve, reject) => {
       postsInstance
          .removeItem(key)
-         .then(() => resolve(`Deleted post with key ${key.userId}`))
+         .then(() => resolve(`Deleted post with key ${key._id}`))
          .catch((err) =>
-            reject(`Unable to delete post with key ${key.userId}`)
+            reject(`Unable to delete post with key ${key._id}`)
          );
    });
 

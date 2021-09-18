@@ -5,6 +5,7 @@ import {
    CardHeader,
    Button,
    Label,
+   Text,
    RatingIndicator,
 } from "@ui5/webcomponents-react";
 
@@ -15,16 +16,17 @@ const MyProject = ({ project }) => {
          header={
             <CardHeader
                titleText={project.title}
-               subtitleText={`Rating: ${project.rating}`}
+               subtitleText={`${project.subTitleText}`}
             />
          }
       >
          <div className="myproject-div">
-            <Label>{`Description: ${
+            <Text>{`Description: ${
                project.description ? project.description : ""
-            }`}</Label>
+            }`}</Text>
             <br />
-            <Label>{`Cost: ${project.estimatedCost}`}</Label>
+            <br />
+            <Label>{`Cost: $${project.estimatedCost}`}</Label>
             <br />
             <Label>{`Start Date: ${new Date(
                project.projectedStartDate
