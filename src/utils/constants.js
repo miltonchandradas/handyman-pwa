@@ -1,5 +1,5 @@
 export const NODE_BASE_URL =
-   "https://handyman-node-restless-toucan-tk.cfapps.eu10.hana.ondemand.com/";
+   "https://handymannode.cfapps.eu10.hana.ondemand.com/";
 export const SUBSCRIPTION_PATH = "api/v1/subscription";
 export const PROJECTS_PATH = "api/v1/projects";
 export const USERS_PATH = "api/v1/users";
