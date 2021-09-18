@@ -78,6 +78,7 @@ export const getUsersFromClientStorage = async () => {
             });
          })
          .then(function () {
+            console.log("Users: ", users);
             resolve(users);
          })
          .catch(function (err) {
