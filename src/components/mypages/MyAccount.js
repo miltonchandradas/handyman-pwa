@@ -191,7 +191,10 @@ const MyAccount = ({ screenSize }) => {
                         </Input>
                      </FormItem>
                      <FormItem label="Last Name">
-                        <Input readonly="true">{users[0].value.lastName}</Input>
+                        <Input
+                           readonly="true"
+                           value={users[0].value.lastName}
+                        ></Input>
                      </FormItem>
                      <FormItem label="Address">
                         <Input readonly="true">{users[0].value.address}</Input>
