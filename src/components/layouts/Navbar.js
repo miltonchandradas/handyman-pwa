@@ -28,7 +28,7 @@ const Navbar = (props) => {
 
    const profileClickHandler = (e) => {
       console.log("Profile was clicked...");
-      history.push("/myaccount");
+      history.push("/");
    };
 
    const projectsClickHandler = (e) => {
@@ -54,7 +54,12 @@ const Navbar = (props) => {
             onLogoClick={logoClickHandler}
             menuItems={
                <>
-                  <StandardListItem data-key="1">Menu Item 1</StandardListItem>
+                  <StandardListItem
+                     data-key="1"
+                     onDetailClick={logoClickHandler}
+                  >
+                     Home
+                  </StandardListItem>
                   <StandardListItem data-key="2">Menu Item 2</StandardListItem>
                   <StandardListItem data-key="3">Menu Item 3</StandardListItem>
                </>
