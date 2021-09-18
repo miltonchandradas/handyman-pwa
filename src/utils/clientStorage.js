@@ -23,7 +23,6 @@ export const addNewPostToClientStorage = async (post) => {
    await postsInstance.setItem(post._id, post);
 };
 
-
 export const addProjectsToClientStorage = async (projects) => {
    console.log(
       "From clientStorage - addProjectsToClientStorage: ",
@@ -123,10 +122,8 @@ export const deletePostFromClientStorage = async (key) => {
    let promise = await new Promise((resolve, reject) => {
       postsInstance
          .removeItem(key)
-         .then(() => resolve(`Deleted post with key ${key._id}`))
-         .catch((err) =>
-            reject(`Unable to delete post with key ${key._id}`)
-         );
+         .then(() => resolve(`Deleted post...`))
+         .catch((err) => reject(`Unable to delete post...`));
    });
 
    return promise;

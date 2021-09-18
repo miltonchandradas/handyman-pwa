@@ -69,7 +69,7 @@ const MyProjects = ({ screenSize }) => {
 
    const btnClickHandler = async (event) => {
       console.log("From MyProjects - btnClickHandler:  Add new Project");
-      setOpen(true);
+      
 
       if ("serviceWorker" in navigator && "SyncManager" in window) {
          let sw = await navigator.serviceWorker.ready;
@@ -91,6 +91,8 @@ const MyProjects = ({ screenSize }) => {
          } catch (err) {
             console.log("From MyProjects - btnClickHandler:  Error: ", err);
          }
+
+         setOpen(true);
       }
    };
 
