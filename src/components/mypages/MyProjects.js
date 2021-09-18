@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useRef, useState, useEffect } from "react";
 
 import Footer from "../layouts/Footer";
 
@@ -9,7 +9,7 @@ import {
    Toolbar,
    ToolbarSpacer,
    Icon,
-   MessageBox,
+   Toast,
 } from "@ui5/webcomponents-react";
 import { NODE_BASE_URL, PROJECTS_PATH } from "../../utils/constants";
 
@@ -21,11 +21,12 @@ import {
 } from "../../utils/clientStorage";
 
 const MyProjects = ({ screenSize }) => {
+   const toast = useRef();
+
    const [networkStatus, setNetworkStatus] = useState(
       "Network connection is OK, showing latest results"
    );
    const [projects, setProjects] = useState([]);
-   const [open, setOpen] = useState(false);
 
    const getProjectsFromBackend = async () => {
       const requestUrl = `${NODE_BASE_URL}${PROJECTS_PATH}`;
@@ -69,7 +70,9 @@ const MyProjects = ({ screenSize }) => {
 
    const btnClickHandler = async (event) => {
       console.log("From MyProjects - btnClickHandler:  Add new Project");
-      
+
+      console.log("From MyProjects - btnClickHandler:  Show Toast...");
+      toast.current.show();
 
       if ("serviceWorker" in navigator && "SyncManager" in window) {
          let sw = await navigator.serviceWorker.ready;
@@ -91,13 +94,7 @@ const MyProjects = ({ screenSize }) => {
          } catch (err) {
             console.log("From MyProjects - btnClickHandler:  Error: ", err);
          }
-
-         setOpen(true);
       }
-   };
-
-   const closeHandler = () => {
-      setOpen(false);
    };
 
    return (
@@ -119,12 +116,11 @@ const MyProjects = ({ screenSize }) => {
             <Toolbar className="myprojects-controls">
                <ToolbarSpacer />
                <Button onClick={btnClickHandler}>Add new Project</Button>
-               <MessageBox open={open} onClose={closeHandler}>
-                  Preconfigured project has been added...
-               </MessageBox>
                <Icon name="settings" />
                <Icon name="download" />
             </Toolbar>
+
+            <Toast ref={toast}>Preconfigured project has been added...</Toast>
 
             <FlexBox
                direction={screenSize > 480 ? "Row" : "Column"}
