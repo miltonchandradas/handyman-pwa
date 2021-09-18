@@ -3,7 +3,6 @@ import React, { Fragment, useState, useEffect } from "react";
 import Footer from "../layouts/Footer";
 
 import {
-   FlexBox,
    Form,
    FormItem,
    FormGroup,
@@ -185,19 +184,21 @@ const MyAccount = ({ screenSize }) => {
                <Form titleText="Account Details">
                   <FormGroup titleText="Personal Data">
                      <FormItem label="First Name">
-                        <Input readonly="true">{users[0].firstName}</Input>
+                        <Input readonly="true">
+                           {users[0].value.firstName}
+                        </Input>
                      </FormItem>
                      <FormItem label="Last Name">
-                        <Input readonly="true">{users[0].lastName}</Input>
+                        <Input readonly="true">{users[0].value.lastName}</Input>
                      </FormItem>
                      <FormItem label="Address">
-                        <Input readonly="true">{users[0].address}</Input>
+                        <Input readonly="true">{users[0].value.address}</Input>
                      </FormItem>
                      <FormItem label="Email">
-                        <Input readonly="true">{users[0].email}</Input>
+                        <Input readonly="true">{users[0].value.email}</Input>
                      </FormItem>
                      <FormItem label="Phone">
-                        <Input readonly="true">{users[0].phone}</Input>
+                        <Input readonly="true">{users[0].value.phone}</Input>
                      </FormItem>
                   </FormGroup>
                </Form>
