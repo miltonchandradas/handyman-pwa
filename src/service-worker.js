@@ -151,9 +151,7 @@ self.addEventListener("sync", async (event) => {
                   json
                );
 
-               console.log(
-                  await deletePostFromClientStorage(json._id.toString())
-               );
+               console.log(await deletePostFromClientStorage(json.data._id));
             });
       });
    }
