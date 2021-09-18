@@ -50,7 +50,7 @@ const MyAccount = ({ screenSize }) => {
    };
 
    useEffect(() => {
-      console.log("From MyProjects - useEffect is called");
+      console.log("From MyAccount - useEffect is called");
 
       const getUsers = async () => {
          try {
@@ -181,13 +181,27 @@ const MyAccount = ({ screenSize }) => {
                <Icon name="settings" />
                <Icon name="download" />
             </Toolbar>
-            <Form titleText="Account Details">
-               <FormGroup titleText="Personal Data">
-                  <FormItem label="Name">
-                     <Input readonly="true">{`${users[0].firstName} ${users[0].lastName}`}</Input>
-                  </FormItem>
-               </FormGroup>
-            </Form>
+            {users && users.length > 0 && (
+               <Form titleText="Account Details">
+                  <FormGroup titleText="Personal Data">
+                     <FormItem label="First Name">
+                        <Input readonly="true">{users[0].firstName}</Input>
+                     </FormItem>
+                     <FormItem label="Last Name">
+                        <Input readonly="true">{users[0].lastName}</Input>
+                     </FormItem>
+                     <FormItem label="Address">
+                        <Input readonly="true">{users[0].address}</Input>
+                     </FormItem>
+                     <FormItem label="Email">
+                        <Input readonly="true">{users[0].email}</Input>
+                     </FormItem>
+                     <FormItem label="Phone">
+                        <Input readonly="true">{users[0].phone}</Input>
+                     </FormItem>
+                  </FormGroup>
+               </Form>
+            )}
          </section>
          <Footer></Footer>
       </Fragment>
