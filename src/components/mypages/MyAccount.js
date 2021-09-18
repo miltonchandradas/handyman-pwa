@@ -48,6 +48,8 @@ const MyAccount = ({ screenSize }) => {
 
       console.log("Modified Users: ", modifiedUsers);
       setUsers(modifiedUsers);
+
+      console.log("Users: ", users[0]);
    };
 
    useEffect(() => {
