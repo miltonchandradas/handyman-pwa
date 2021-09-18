@@ -5,7 +5,7 @@ import Footer from "../layouts/Footer";
 import MyCamera from "../camera/MyCamera";
 import { Button } from "@ui5/webcomponents-react";
 
-const MyReviews = () => {
+const MyReviews = ({screenSize}) => {
    const [isHidden, setIsHidden] = useState(true);
 
    const btnClickHandler = (event) => {
@@ -21,7 +21,7 @@ const MyReviews = () => {
             </Button>
             {!isHidden && <MyCamera></MyCamera>}
          </section>
-         <Footer></Footer>
+         {screenSize > 480 && <Footer></Footer>}
       </Fragment>
    );
 };

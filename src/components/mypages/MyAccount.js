@@ -45,8 +45,6 @@ const MyAccount = ({ screenSize }) => {
       });
 
       await addUsersToClientStorage(modifiedUsers);
-
-      console.log("Modified users: ", modifiedUsers);
       setUsers(modifiedUsers);
    };
 
@@ -186,9 +184,10 @@ const MyAccount = ({ screenSize }) => {
                <Form titleText="Account Details">
                   <FormGroup titleText="Personal Data">
                      <FormItem label="First Name">
-                        <Input readonly="true">
-                           {users[0].value.firstName}
-                        </Input>
+                        <Input
+                           readonly="true"
+                           value={users[0].value.firstName}
+                        ></Input>
                      </FormItem>
                      <FormItem label="Last Name">
                         <Input
@@ -197,19 +196,28 @@ const MyAccount = ({ screenSize }) => {
                         ></Input>
                      </FormItem>
                      <FormItem label="Address">
-                        <Input readonly="true">{users[0].value.address}</Input>
+                        <Input
+                           readonly="true"
+                           value={users[0].value.address}
+                        ></Input>
                      </FormItem>
                      <FormItem label="Email">
-                        <Input readonly="true">{users[0].value.email}</Input>
+                        <Input
+                           readonly="true"
+                           value={users[0].value.email}
+                        ></Input>
                      </FormItem>
                      <FormItem label="Phone">
-                        <Input readonly="true">{users[0].value.phone}</Input>
+                        <Input
+                           readonly="true"
+                           value={users[0].value.phone}
+                        ></Input>
                      </FormItem>
                   </FormGroup>
                </Form>
             )}
          </section>
-         <Footer></Footer>
+         {screenSize > 480 && <Footer></Footer>}
       </Fragment>
    );
 };

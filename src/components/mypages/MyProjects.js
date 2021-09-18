@@ -121,7 +121,7 @@ const MyProjects = ({ screenSize }) => {
                   })}
             </FlexBox>
          </section>
-         <Footer></Footer>
+         {screenSize > 480 && <Footer></Footer>}
       </Fragment>
    );
 };
