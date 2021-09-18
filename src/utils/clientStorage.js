@@ -11,6 +11,10 @@ const postsInstance = localforage.createInstance({
    name: "posts",
 });
 
+const usersInstance = localforage.createInstance({
+   name: "users",
+});
+
 export const addPostToClientStorage = async (post) => {
    console.log(
       "From clientStorage - addPostToClientStorage: ",
@@ -40,6 +44,41 @@ export const getProjectsFromClientStorage = async () => {
          })
          .then(function () {
             resolve(projects);
+         })
+         .catch(function (err) {
+            reject([
+               {
+                  key: "-100",
+                  value: { name: "Unable to read data from cache..." },
+               },
+            ]);
+         });
+   });
+
+   return promise;
+};
+
+export const addUsersToClientStorage = async (users) => {
+   console.log(
+      "From clientStorage - addUsersToClientStorage: ",
+      JSON.stringify(users)
+   );
+   await usersInstance.setItems(users);
+};
+
+export const getUsersFromClientStorage = async () => {
+   let users = [];
+
+   let promise = await new Promise((resolve, reject) => {
+      projectsInstance
+         .iterate(function (value, key) {
+            users.push({
+               key,
+               value,
+            });
+         })
+         .then(function () {
+            resolve(users);
          })
          .catch(function (err) {
             reject([

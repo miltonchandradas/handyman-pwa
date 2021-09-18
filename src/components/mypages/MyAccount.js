@@ -1,13 +1,78 @@
-import React from "react";
+import React, { Fragment, useState, useEffect } from "react";
+
+import Footer from "../layouts/Footer";
+
+import {
+   FlexBox,
+   Form,
+   FormItem,
+   FormGroup,
+   Input,
+   Button,
+   MessageStrip,
+   Toolbar,
+   ToolbarSpacer,
+   Icon,
+} from "@ui5/webcomponents-react";
 
 import {
    PUBLIC_VAPID_KEY,
    NODE_BASE_URL,
    SUBSCRIPTION_PATH,
+   USERS_PATH,
 } from "../../utils/constants";
-import { Button } from "@ui5/webcomponents-react";
 
-const MyAccount = () => {
+import {
+   getUsersFromClientStorage,
+   addUsersToClientStorage,
+} from "../../utils/clientStorage";
+
+const MyAccount = ({ screenSize }) => {
+   const [networkStatus, setNetworkStatus] = useState(
+      "Network connection is OK, showing latest results"
+   );
+   const [users, setUsers] = useState([]);
+
+   const getUsersFromBackend = async () => {
+      const requestUrl = `${NODE_BASE_URL}${USERS_PATH}`;
+      const response = await fetch(requestUrl);
+      const data = await response.json();
+
+      let modifiedUsers = data.data.map((user) => {
+         return {
+            key: user._id,
+            value: user,
+         };
+      });
+
+      await addUsersToClientStorage(modifiedUsers);
+      setUsers(modifiedUsers);
+   };
+
+   useEffect(() => {
+      console.log("From MyProjects - useEffect is called");
+
+      const getUsers = async () => {
+         try {
+            await getUsersFromBackend();
+            return "Network connection is OK, showing latest results";
+         } catch (err) {
+            let users = await getUsersFromClientStorage();
+            setUsers(users);
+            return "No network connection, showing offline results";
+         }
+      };
+
+      const asyncFetchPromise = async () => {
+         let status = await getUsers();
+
+         console.log("Setting network status: ", status);
+         setNetworkStatus(status);
+      };
+
+      asyncFetchPromise();
+   }, []);
+
    const btnClickHandler = (event) => {
       console.log("From MyAccount - Button click handler ");
 
@@ -95,10 +160,37 @@ const MyAccount = () => {
    };
 
    return (
-      <div>
-         <h1>My Account</h1>
-         <Button onClick={btnClickHandler}>Enable Notification</Button>
-      </div>
+      <Fragment>
+         <section>
+            <h1>My Account</h1>
+            <MessageStrip
+               className="myusers-controls"
+               hideCloseButton="true"
+               design={
+                  networkStatus ===
+                  "Network connection is OK, showing latest results"
+                     ? "Information"
+                     : "Negative"
+               }
+            >
+               {networkStatus}
+            </MessageStrip>
+            <Toolbar className="myusers-controls">
+               <ToolbarSpacer />
+               <Button onClick={btnClickHandler}>Enable Notification</Button>
+               <Icon name="settings" />
+               <Icon name="download" />
+            </Toolbar>
+            <Form titleText="Account Details">
+               <FormGroup titleText="Personal Data">
+                  <FormItem label="Name">
+                     <Input readonly="true">{`${users[0].firstName} ${users[0].lastName}`}</Input>
+                  </FormItem>
+               </FormGroup>
+            </Form>
+         </section>
+         <Footer></Footer>
+      </Fragment>
    );
 };
 

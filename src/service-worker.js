@@ -26,7 +26,7 @@ clientsClaim();
 // even if you decide not to use precaching. See https://cra.link/PWA
 precacheAndRoute(self.__WB_MANIFEST);
 
-const CACHE_NAME = "v2";
+const CACHE_NAME = "v3";
 const STATIC_CACHED_ASSETS = [];
 const POSTS_URL = "https://jsonplaceholder.typicode.com/posts";
 
@@ -112,6 +112,7 @@ self.addEventListener("fetch", (event) => {
 
    if (
       requestPath === "/api/v1/projects" ||
+      requestPath === "/api/v1/users" ||
       requestPath === "/api/v1/subscription"
    ) {
       return event.respondWith(fetch(event.request));

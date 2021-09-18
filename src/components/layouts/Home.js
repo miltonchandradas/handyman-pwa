@@ -7,10 +7,12 @@ import Footer from "./Footer";
 
 const Home = ({ screenSize }) => {
    return (
-      <div>
-         <Header screenSize={screenSize}></Header>
-         <Booking screenSize={screenSize}></Booking>
-         <Howitworks></Howitworks>
+      <div className="page-container">
+         <div className="content-wrap">
+            <Header screenSize={screenSize}></Header>
+            <Booking screenSize={screenSize}></Booking>
+            <Howitworks></Howitworks>
+         </div>
          <Footer></Footer>
       </div>
    );
