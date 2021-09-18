@@ -70,12 +70,14 @@ export const getUsersFromClientStorage = async () => {
    let users = [];
 
    let promise = await new Promise((resolve, reject) => {
-      projectsInstance
+      usersInstance
          .iterate(function (value, key) {
             users.push({
                key,
                value,
             });
+
+            console.log(JSON.stringify(users));
          })
          .then(function () {
             resolve(users);
@@ -84,7 +86,7 @@ export const getUsersFromClientStorage = async () => {
             reject([
                {
                   key: "-100",
-                  value: { name: "Unable to read data from cache..." },
+                  value: { firstName: "Unable to read data from cache..." },
                },
             ]);
          });
