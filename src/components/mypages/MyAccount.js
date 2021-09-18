@@ -45,6 +45,8 @@ const MyAccount = ({ screenSize }) => {
       });
 
       await addUsersToClientStorage(modifiedUsers);
+
+      console.log("Modified Users: ", modifiedUsers);
       setUsers(modifiedUsers);
    };
 

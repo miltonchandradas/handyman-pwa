@@ -76,8 +76,6 @@ export const getUsersFromClientStorage = async () => {
                key,
                value,
             });
-
-            console.log(JSON.stringify(users));
          })
          .then(function () {
             resolve(users);
