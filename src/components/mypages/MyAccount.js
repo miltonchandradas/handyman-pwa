@@ -45,11 +45,7 @@ const MyAccount = ({ screenSize }) => {
       });
 
       await addUsersToClientStorage(modifiedUsers);
-
-      console.log("Modified Users: ", modifiedUsers);
       setUsers(modifiedUsers);
-
-      console.log("Users: ", users[0]);
    };
 
    useEffect(() => {
@@ -184,7 +180,7 @@ const MyAccount = ({ screenSize }) => {
                <Icon name="settings" />
                <Icon name="download" />
             </Toolbar>
-            {users && users.length > 0 && (
+            {users && users.length > 1 && (
                <Form titleText="Account Details">
                   <FormGroup titleText="Personal Data">
                      <FormItem label="First Name">
