@@ -9,7 +9,7 @@ import {
    RatingIndicator,
 } from "@ui5/webcomponents-react";
 
-const MyProject = ({ project }) => {
+const MyProject = ({ project, networkStatus }) => {
    return (
       <Card
          className="myproject-card"

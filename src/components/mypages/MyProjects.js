@@ -23,9 +23,7 @@ import {
 const MyProjects = ({ screenSize }) => {
    const toast = useRef();
 
-   const [networkStatus, setNetworkStatus] = useState(
-      "Network connection is OK, showing latest results"
-   );
+   const [networkStatus, setNetworkStatus] = useState(1);
    const [projects, setProjects] = useState([]);
 
    const getProjectsFromBackend = async () => {
@@ -50,11 +48,11 @@ const MyProjects = ({ screenSize }) => {
       const getProjects = async () => {
          try {
             await getProjectsFromBackend();
-            return "Network connection is OK, showing latest results";
+            return 1;
          } catch (err) {
             let projects = await getProjectsFromClientStorage();
             setProjects(projects);
-            return "No network connection, showing offline results";
+            return -1;
          }
       };
 
@@ -104,14 +102,11 @@ const MyProjects = ({ screenSize }) => {
             <MessageStrip
                className="myprojects-controls"
                hideCloseButton="true"
-               design={
-                  networkStatus ===
-                  "Network connection is OK, showing latest results"
-                     ? "Information"
-                     : "Negative"
-               }
+               design={networkStatus === 1 ? "Information" : "Negative"}
             >
-               {networkStatus}
+               {networkStatus === 1
+                  ? "Network connection is OK, showing latest results"
+                  : "No network connection, showing offline results"}
             </MessageStrip>
             <Toolbar className="myprojects-controls">
                <ToolbarSpacer />
@@ -129,7 +124,11 @@ const MyProjects = ({ screenSize }) => {
                {projects &&
                   projects.map((project) => {
                      return (
-                        <MyProject key={project.key} project={project.value} />
+                        <MyProject
+                           key={project.key}
+                           project={project.value}
+                           networkStatus={networkStatus}
+                        />
                      );
                   })}
             </FlexBox>
