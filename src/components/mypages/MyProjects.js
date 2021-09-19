@@ -1,4 +1,5 @@
 import React, { Fragment, useRef, useState, useEffect } from "react";
+import { v4 as uuidv4 } from 'uuid';
 
 import Footer from "../layouts/Footer";
 
@@ -78,7 +79,7 @@ const MyProjects = ({ screenSize }) => {
          let sw = await navigator.serviceWorker.ready;
 
          let project = {
-            _id: "5d713995b721c3bb38c1f5d0",
+            _id: uuidv4(),
             title: "foo",
             subTitleText: "bar",
             description:
