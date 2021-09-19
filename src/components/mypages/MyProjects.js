@@ -1,7 +1,6 @@
 import React, { Fragment, useRef, useState, useEffect } from "react";
-import { ObjectID } from "bson-objectid";
-
 import Footer from "../layouts/Footer";
+import { ObjectID } from "bson";
 
 import {
    FlexBox,
