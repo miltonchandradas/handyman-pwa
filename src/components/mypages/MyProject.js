@@ -12,7 +12,7 @@ import {
 const MyProject = ({ project, networkStatus }) => {
    return (
       <Card
-         className="myproject-card"
+         className={networkStatus === 1 ? "myproject-card" : "myproject-card-no-network"}
          header={
             <CardHeader
                titleText={project.title}
