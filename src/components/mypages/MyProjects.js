@@ -78,7 +78,7 @@ const MyProjects = ({ screenSize }) => {
          let sw = await navigator.serviceWorker.ready;
 
          let project = {
-            _id: ObjectID(),
+            _id: ObjectID().toString(),
             title: "foo",
             subTitleText: "bar",
             description:
