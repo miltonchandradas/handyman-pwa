@@ -9,10 +9,10 @@ import {
    RatingIndicator,
 } from "@ui5/webcomponents-react";
 
-const MyProject = ({ project, networkStatus }) => {
+const MyProject = ({ project }) => {
    return (
       <Card
-         className={networkStatus === 1 ? "myproject-card" : "myproject-card-no-network"}
+         className="myproject-card"
          header={
             <CardHeader
                titleText={project.title}

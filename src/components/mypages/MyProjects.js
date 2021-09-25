@@ -124,11 +124,7 @@ const MyProjects = ({ screenSize }) => {
                {projects &&
                   projects.map((project) => {
                      return (
-                        <MyProject
-                           key={project.key}
-                           project={project.value}
-                           networkStatus={networkStatus}
-                        />
+                        <MyProject key={project.key} project={project.value} />
                      );
                   })}
             </FlexBox>
