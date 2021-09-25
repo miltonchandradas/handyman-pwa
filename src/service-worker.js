@@ -181,6 +181,8 @@ self.addEventListener("push", (event) => {
       body: data.body,
    };
 
+   console.log("From Service Worker: Title - ", data.title);
+
    event.waitUntil(self.registration.showNotification(data.title, options));
 });
 
