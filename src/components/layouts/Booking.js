@@ -24,7 +24,7 @@ const Booking = ({ screenSize }) => {
                }
             >
                <div className="booking-container">
-                  <img src={lawn} alt="Lawn Mowing" width="100%" />
+                  <img src={lawn} alt="Lawn Mowing" width="298" height="205" />
                   <div className="booking-block">
                      <p>Time saver...</p>
                   </div>
@@ -42,7 +42,12 @@ const Booking = ({ screenSize }) => {
                }
             >
                <div className="booking-container">
-                  <img src={electrical} alt="Electrical" width="100%" />
+                  <img
+                     src={electrical}
+                     alt="Electrical"
+                     width="298"
+                     height="205"
+                  />
                   <div className="booking-block">
                      <p>Best seller...</p>
                   </div>
@@ -60,7 +65,7 @@ const Booking = ({ screenSize }) => {
                }
             >
                <div className="booking-container">
-                  <img src={plumbing} alt="Plumbing" width="100%" />
+                  <img src={plumbing} alt="Plumbing" width="298" height="205" />
                   <div className="booking-block">
                      <p>On sale...</p>
                   </div>

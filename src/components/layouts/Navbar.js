@@ -50,7 +50,7 @@ const Navbar = (props) => {
       <div>
          <ShellBar
             className=""
-            logo={<img src={logo} alt="" />}
+            logo={<img src={logo} alt="" width="192" height="192" />}
             onLogoClick={logoClickHandler}
             menuItems={
                <>
