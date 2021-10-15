@@ -7,7 +7,7 @@ const Header = ({ screenSize }) => {
       <header>
          <div className="header-div">
             {screenSize > 1200 ? (
-               <h1>Handyman - For all your Home Improvement needs !!!</h1>
+               <h1>Handyman - For all your Home Improvement needs !!</h1>
             ) : (
                <h1>Handyman - Home Improvement services</h1>
             )}
